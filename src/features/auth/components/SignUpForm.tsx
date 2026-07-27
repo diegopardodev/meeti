@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { Form, FormInput, FormLabel, FormSubmit } from "@/src/shared/components/forms";
-import { type SignUpInput, SignUpSchema } from "../schemas/authSchema";
+import { type SignUpInput, SignUpSchema } from "../schemas/auth";
 import FormError from "@/src/shared/components/forms/FormError";
 import { signUpAction } from "../actions/auth";
 
