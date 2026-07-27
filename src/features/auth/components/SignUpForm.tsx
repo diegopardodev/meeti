@@ -2,19 +2,29 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
 import { Form, FormInput, FormLabel, FormSubmit } from "@/src/shared/components/forms";
 import { type SignUpInput, SignUpSchema } from "../schemas/authSchema";
 import FormError from "@/src/shared/components/forms/FormError";
 import { signUpAction } from "../actions/auth";
 
 export default function SignUpForm() {
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: zodResolver(SignUpSchema),
         mode: "all"
     });
 
     const onSubmit = async (data: SignUpInput) => {
-        await signUpAction(data);
+        const { error, success } = await signUpAction(data);
+
+        if (error) {
+            toast.error(error);
+        }
+
+        if (success) {
+            toast.success(success);
+            reset();
+        }
     }
 
     return (
