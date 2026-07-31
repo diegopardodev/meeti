@@ -41,7 +41,7 @@ export async function forgotPasswordAction(input: ForgotPasswordInput) {
         }
     }
 
-    const response = await authService.requestPasswordReset(input);
+    const response = await authService.requestPasswordReset(data.data);
     return response;
 }
 
