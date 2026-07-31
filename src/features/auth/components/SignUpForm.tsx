@@ -18,9 +18,7 @@ export default function SignUpForm() {
     const onSubmit = async (data: SignUpInput) => {
         const { error, success } = await signUpAction(data);
 
-        if (error) {
-            toast.error(error);
-        }
+        if (error) toast.error(error);
 
         if (success) {
             toast.success(success);
