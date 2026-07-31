@@ -12,7 +12,9 @@ export default function ForgotPasswordForm() {
                 placeholder="Enter your e-mail"
             />
 
-            <FormSubmit value="Send instructions" />
+            <FormSubmit>
+                Send instructions
+            </FormSubmit>
         </Form>
     )
 }

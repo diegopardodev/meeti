@@ -8,9 +8,10 @@ import { Form, FormInput, FormLabel, FormSubmit } from "@/src/shared/components/
 import { type SignInInput, SignInSchema } from "../schemas/auth";
 import FormError from "@/src/shared/components/forms/FormError";
 import { signInAction } from "../actions/auth";
+import Spinner from "@/src/shared/components/ui/Spinner";
 
 export default function SignInForm() {
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
         resolver: zodResolver(SignInSchema),
         mode: "all"
     });
@@ -49,7 +50,9 @@ export default function SignInForm() {
             />
             {errors.password && <FormError>{errors.password.message}</FormError>}
 
-            <FormSubmit value="Sign In" />
+            <FormSubmit disabled={isSubmitting} className="flex justify-center items-center gap-2">
+                {isSubmitting ? <Spinner /> : "Sign In"}
+            </FormSubmit>
         </Form>
     )
 }
