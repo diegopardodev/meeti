@@ -19,7 +19,7 @@ export async function signUpAction(input: SignUpInput) {
 
 export async function signInAction(input: SignInInput) {
     const data = SignInSchema.safeParse(input);
-
+    
     if (!data.success) {
         return {
             error: "There was an error",

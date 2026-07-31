@@ -1,8 +1,8 @@
+import { headers } from "next/headers";
+import { APIError } from "better-auth";
 import { auth } from "@/src/lib/auth";
 import { SignInInput, SignUpInput } from "../schemas/auth";
 import { authRepository, IAuthRepository } from "./AuthRepository";
-import { APIError } from "better-auth";
-import { headers } from "next/headers";
 
 class AuthService {
     constructor(
@@ -27,7 +27,8 @@ class AuthService {
                 email,
                 password,
                 callbackURL: "/auth/sign-in"
-            }
+            },
+            headers: await headers()
         });
 
         return {
@@ -60,12 +61,13 @@ class AuthService {
 
             return {
                 error: "",
-                success: ""
+                success: "Success"
             }
         } catch (error) {
             if (error instanceof APIError) {
                 const messages: Record<number, string> = {
-                    401: "Invalid credentials"
+                    401: "Invalid credentials",
+                    403: "Email not verified, we've sent a new e-mail. Check your inbox"
                 }
 
                 const errorMessage = messages[error.statusCode];

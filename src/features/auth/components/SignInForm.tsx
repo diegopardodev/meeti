@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { redirect } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { Form, FormInput, FormLabel, FormSubmit } from "@/src/shared/components/forms";
@@ -22,7 +23,7 @@ export default function SignInForm() {
         }
 
         if (success) {
-            toast.success(success);
+            redirect("/dashboard");
         }
     }
 
