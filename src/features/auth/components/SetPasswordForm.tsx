@@ -4,10 +4,9 @@ import { useForm } from "react-hook-form";
 import { redirect, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { Form, FormInput, FormLabel, FormSubmit } from "@/src/shared/components/forms";
+import { Form, FormInput, FormLabel, FormSubmit, FormError } from "@/src/shared/components/forms";
 import { SetPasswordInput, SetPasswordSchema } from "../schemas/auth";
 import Spinner from "@/src/shared/components/ui/Spinner";
-import FormError from "@/src/shared/components/forms/FormError";
 import { setPasswordAction } from "../actions/auth";
 
 export default function SetPasswordForm() {

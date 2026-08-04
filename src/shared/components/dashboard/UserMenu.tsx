@@ -4,7 +4,6 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import { signOut } from "@/src/lib/auth-client";
 
 export default function UserMenu() {
-
     return (
         <Menu as="div" className="relative ml-3">
             <MenuButton className="text-gray-400 relative flex rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">

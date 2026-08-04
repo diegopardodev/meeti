@@ -59,10 +59,6 @@ export default function DashboardPanel() {
                     <Bars3Icon aria-hidden="true" className="size-6" />
                 </button>
 
-                <div className="flex-1 text-lg font-semibold text-gray-900 lg:hidden ml-5">
-                    Navigation Menu
-                </div>
-
                 <div className=" inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ">
                     <NotificationsPanel />
                     <UserMenu />

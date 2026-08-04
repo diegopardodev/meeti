@@ -3,11 +3,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { Form, FormInput, FormLabel, FormSubmit } from "@/src/shared/components/forms";
+import { Form, FormInput, FormLabel, FormSubmit, FormError } from "@/src/shared/components/forms";
 import { ForgotPasswordInput, ForgotPasswordSchema } from "../schemas/auth";
 import Spinner from "@/src/shared/components/ui/Spinner";
 import { forgotPasswordAction } from "../actions/auth";
-import FormError from "@/src/shared/components/forms/FormError";
 
 export default function ForgotPasswordForm() {
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
