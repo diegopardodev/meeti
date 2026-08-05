@@ -27,8 +27,8 @@ export default function DashboardNavigation() {
                                             href={item.href as Route}
                                             className={classNames(
                                                 currentPath(item.href, pathname)
-                                                    ? "bg-cyan-50 text-cyan-600"
-                                                    : "text-gray-700 hover:bg-cyan-50 hover:text-cyan-600",
+                                                    ? "bg-orange-50 text-orange-600"
+                                                    : "text-gray-700 hover:bg-orange-50 hover:text-orange-600",
                                                 "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                                             )}
                                         >
@@ -36,8 +36,8 @@ export default function DashboardNavigation() {
                                                 aria-hidden="true"
                                                 className={classNames(
                                                     currentPath(item.href, pathname)
-                                                        ? "text-cyan-600"
-                                                        : "text-gray-400 group-hover:text-cyan-600",
+                                                        ? "text-orange-600"
+                                                        : "text-gray-400 group-hover:text-orange-600",
                                                     "size-6 shrink-0",
                                                 )}
                                             />
