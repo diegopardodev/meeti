@@ -14,7 +14,7 @@ export default function JoinedCommunitiesPage() {
 
             <Link
                 href="/dashboard/communities"
-                className="mt-5 block lg:inline-block text-center bg-orange-500 hover:bg-orange-600 transition-colors text-xs lg:text-xl text-white py-3 px-10  font-bold"
+                className="mt-5 block lg:inline-block text-center bg-orange-500 hover:bg-orange-600 transition-colors text-sm lg:text-lg text-white py-2 px-5 font-bold"
             >Back to communities</Link>
         </>
     )

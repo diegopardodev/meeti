@@ -13,7 +13,7 @@ export default async function MyCommunities() {
 
     return (
         communities.length ? (
-            <ul role="list" className="mt-10 shadow-lg p-10 divide-y divide-gray-100">
+            <ul role="list" className="mt-10 shadow-lg p-10 divide-y divide-gray-200">
                 {communities.map(community => (
                     <CommunityItem key={community.data.id} community={community} />
                 ))}

@@ -14,7 +14,7 @@ export default function UploadImage() {
         <>
             <UploadDropzone
                 endpoint="meetiUploader"
-                className="ut-button:bg-orange-500 hover:ut-button:bg-orange-600 ut-button:transition-colors ut-button:ease-in-out ut-button:duration-300"
+                className="ut-button:hidden"
                 onClientUploadComplete={(res => {
                     const url = res[0].ufsUrl;
                     setUploadedImage(url);
@@ -22,12 +22,10 @@ export default function UploadImage() {
                     clearErrors("image");
                 })}
                 appearance={{
-                    button: "font-black py-3 w-full block h-auto rounded-none after:bg-orange-500 after:h-2 after:top-0",
                     label: "text-sm text-gray-500 hover:text-gray-600",
                     allowedContent: "text-sm"
                 }}
                 content={{
-                    button: "Choose file",
                     label: "Choose a file or drag and drop",
                     allowedContent: "Image (max. 1MB)"
                 }}
