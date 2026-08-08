@@ -9,7 +9,6 @@ export default async function MyCommunities() {
     if (!session) redirect("/auth/sign-in");
 
     const communities = await communityService.getUserCommunities(session.user);
-    console.log(communities)
 
     return (
         communities.length ? (

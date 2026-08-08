@@ -3,6 +3,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { SelectCommunity } from "../types";
+import Link from "next/link";
 
 type Props = {
     community: SelectCommunity;
@@ -30,12 +31,12 @@ export default function CommunityDropdownMenu({ community }: Props) {
                     </a>
                 </MenuItem>
                 <MenuItem>
-                    <a
-                        href={``}
+                    <Link
+                        href={`/dashboard/communities/${community.id}/edit`}
                         className="block px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
                     >
                         Edit <span className="sr-only">, {community.name}</span>
-                    </a>
+                    </Link>
                 </MenuItem>
                 <MenuItem>
                     <button

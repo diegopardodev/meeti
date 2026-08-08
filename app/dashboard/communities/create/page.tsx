@@ -1,14 +1,19 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import Heading from "@/src/shared/components/typography/Heading";
 import { generatePageTitle } from "@/src/shared/utils/metadata";
 import CreateCommunity from "@/src/features/communities/components/CreateCommunity";
+import { getServerSession } from "@/src/lib/auth-server";
 
 export const metadata: Metadata = {
     title: generatePageTitle("Create a community")
 }
 
-export default function CreateCommunityPage() {
+export default async function CreateCommunityPage() {
+    const session = await getServerSession();
+    if (!session) redirect("/auth/sign-in");
+
     return (
         <>
             <Heading>Create a community</Heading>
