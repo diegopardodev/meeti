@@ -4,6 +4,8 @@ import { CommunityPolicy } from "../policies/CommunityPolicy";
 import { MembershipPolicy } from "../policies/MembershipPolicy";
 import { CommunityInput } from "../schemas/community";
 import { communityRepository, ICommunityRepository } from "./CommunityRepository";
+import { checkPassword } from "@/src/shared/utils/auth";
+import { deleteUTFiles } from "@/src/lib/uploadthing-server";
 
 class CommunityService {
     constructor(
@@ -79,6 +81,29 @@ class CommunityService {
         }
 
         await this.communityRepository.update(data, communityId);
+    }
+
+    async deleteCommunity(communityId: string, password: string, user: User) {
+        const community = await this.getCommunity(communityId);
+
+        if (!CommunityPolicy.canDelete(user, community)) throw new Error("You are not allowed to delete this community");
+
+        const isValidPassword = await checkPassword(password);
+
+        if (!isValidPassword) {
+            return {
+                error: "Password do not match",
+                success: ""
+            }
+        }
+
+        await this.communityRepository.delete(communityId);
+        await deleteUTFiles(community.image);
+
+        return {
+            error: "",
+            success: "Community deleted successfully"
+        }
     }
 }
 
