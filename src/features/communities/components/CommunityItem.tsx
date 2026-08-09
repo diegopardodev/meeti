@@ -8,7 +8,7 @@ type Props = {
 }
 
 export default function CommunityItem({community}: Props) {
-    const { name, image, description } = community.data;
+    const { id, name, image, description } = community.data;
 
     return (
         <li className="flex justify-between gap-x-6 py-5">
@@ -23,7 +23,11 @@ export default function CommunityItem({community}: Props) {
                     />
                 </div>
                 <div className="min-w-0 flex-auto">
-                    <Link href={"/"} className="hover:underline font-bold text-lg">
+                    <Link
+                        href={`/communities/${id}`}
+                        className="hover:underline font-bold text-lg"
+                        target="_blank"
+                    >
                         {name}
                     </Link>
                     <p className="text-gray-600 text-sm line">{description}</p>
