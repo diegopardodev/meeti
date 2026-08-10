@@ -1,3 +1,5 @@
+"use client";
+
 import { redirect } from "next/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/24/outline";

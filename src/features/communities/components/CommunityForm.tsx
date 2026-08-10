@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FormInput, FormLabel, FormTextArea, FormError } from "@/src/shared/components/forms";
 import { CommunityInput } from "../schemas/community";

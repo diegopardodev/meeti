@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
@@ -55,7 +57,7 @@ export default function UploadImage() {
 
             {currentImage && !uploadedImage && (
                 <>
-                    <p className="text-lg font-bold">New image:</p>
+                    <p className="text-lg font-bold">Current image:</p>
                     <Image
                         src={currentImage}
                         alt="Meeti Image"

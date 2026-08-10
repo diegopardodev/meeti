@@ -22,7 +22,7 @@ class CommunityService {
     async getUserCommunities(user: User) {
         const communities = await this.communityRepository.findByUser(user.id);
 
-        const enriched = await Promise.all(communities.map(async (community) => {
+        const enriched = await Promise.all(communities.map(community => {
             const isMember = true;
             const isAdmin = CommunityPolicy.isAdmin(user, community);
 
