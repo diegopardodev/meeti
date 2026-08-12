@@ -20,7 +20,10 @@ export default function CommunityActionsPanel({ permissions, communityId }: Prop
             )}
 
             {permissions.canJoin || permissions.canLeave ? (
-                <CommunityMembership permissions={permissions} />
+                <CommunityMembership
+                    permissions={permissions}
+                    communityId={communityId}
+                />
             ) : null}
         </div>
     )

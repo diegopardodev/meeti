@@ -1,13 +1,13 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { redirect } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { Form, FormError } from "@/src/shared/components/forms";
 import { useCommunityStore } from "../store/community";
 import { CheckPasswordInput, CheckPasswordSchema } from "../../auth/schemas/auth";
 import { deleteCommunityAction } from "../actions/community";
-import { revalidatePath } from "next/cache";
 
 export default function DeleteCommunityForm() {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -28,7 +28,9 @@ export default function DeleteCommunityForm() {
             toast.success(success);
             setOpen(false);
             setCommunity(null);
-            revalidatePath("/dasboard/communities");
+            setTimeout(() => {
+                redirect("/dashboard/communities");
+            }, 1000);
         }
     }
 
