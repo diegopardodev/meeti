@@ -1,8 +1,11 @@
-import { PlusIcon } from "@heroicons/react/20/solid";
-import { UserGroupIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { PlusIcon } from "@heroicons/react/20/solid";
 
-export default function EmptyState() {
+type Props = {
+    section: "communities" | "joined";
+}
+
+export default function EmptyState({ section }: Props) {
     return (
         <div className="flex flex-col items-center mt-20 border rounded-lg border-dashed border-gray-400 p-10">
             <svg
@@ -20,14 +23,14 @@ export default function EmptyState() {
                 />
             </svg>
             <h3 className="mt-2 text-sm font-semibold text-gray-900">No communities</h3>
-            <p className="mt-1 text-sm text-gray-500">Get started by creating a new community.</p>
+            <p className="mt-1 text-sm text-gray-500">{ section === "communities" ? "Get started by creating a new community." : "Get started by joining a community" }</p>
             <div className="mt-6">
                 <Link
-                    href="/dashboard/communities/create"
+                    href={`/dashboard/communities/${section === "communities" ? "create" : "joined"}`}
                     className="inline-flex items-center rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-orange-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                 >
                     <PlusIcon aria-hidden="true" className="mr-1.5 -ml-0.5 size-5" />
-                    New Community
+                    { section === "communities" ? "New Community" : "Join Community" }
                 </Link>
             </div>
         </div>

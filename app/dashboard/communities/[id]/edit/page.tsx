@@ -14,14 +14,6 @@ export async function generateMetadata(props: PageProps<"/dashboard/communities/
     return {
         title: generatePageTitle(`Edit community: ${community.name}`),
         description: community.description,
-        openGraph: {
-            title: "Share community",
-            images: [
-                {
-                    url: community.image
-                }
-            ]
-        }
     }
 }
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CommunityWithPermissions } from "../types"
 import CommunityDropdownMenu from "./CommunityDropdownMenu";
+import { pluralize } from "@/src/shared/utils/string";
 
 type Props = {
     community: CommunityWithPermissions;
@@ -31,7 +32,7 @@ export default function CommunityItem({community}: Props) {
                         {name}
                     </Link>
                     <p className="text-gray-600 text-sm line">{description}</p>
-                    <p className="text-gray-600 text-sm"></p>
+                    <p className="text-gray-600 text-sm">{community.memberCount} {pluralize("follower", community.memberCount)}</p>
                 </div>
             </div>
             <div className="flex shrink-0 items-center gap-x-6">

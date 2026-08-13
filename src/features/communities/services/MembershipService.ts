@@ -1,4 +1,5 @@
 import { User } from "../../auth/types";
+import { CommunityPolicy } from "../policies/CommunityPolicy";
 import { MembershipPolicy } from "../policies/MembershipPolicy";
 import { communityRepository, ICommunityRepository } from "./CommunityRepository";
 import { IMembershipRepository, membershipRepository } from "./MembershipRepository";
@@ -40,6 +41,34 @@ class MembershipService {
                 }
             }
         }
+    }
+
+    async getJoinedCommunities(user: User) {
+        const joined = await this.membershipRepository.findJoinedCommunities(user.id);
+
+        const enriched = await Promise.all(joined.map(async ({community}) => {
+            const isMember = true;
+            const isAdmin = CommunityPolicy.isAdmin(user, community);
+            const memberCount = await this.membershipRepository.getMemberCount(community.id);
+
+            return {
+                data: community,
+                memberCount,
+                context: {
+                    isMember,
+                    isAdmin
+                },
+                permissions: {
+                    canEdit: CommunityPolicy.canEdit(user, community),
+                    canDelete: CommunityPolicy.canDelete(user, community),
+                    canJoin: MembershipPolicy.canJoin(user, community, isMember),
+                    canLeave: MembershipPolicy.canLeave(user, community, isMember),
+                    canViewMembers: CommunityPolicy.canViewMembers(user, community)
+                }
+            }
+        }));
+
+        return enriched;
     }
 }
 

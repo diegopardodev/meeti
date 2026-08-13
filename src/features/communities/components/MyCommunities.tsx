@@ -17,6 +17,6 @@ export default async function MyCommunities() {
                     <CommunityItem key={community.data.id} community={community} />
                 ))}
             </ul>
-        ) : <EmptyState />
+        ) : <EmptyState section="communities" />
     )
 }

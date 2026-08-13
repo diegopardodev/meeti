@@ -24,12 +24,14 @@ class CommunityService {
     async getUserCommunities(user: User) {
         const communities = await this.communityRepository.findByUser(user.id);
 
-        const enriched = await Promise.all(communities.map(community => {
+        const enriched = await Promise.all(communities.map(async community => {
             const isMember = true;
             const isAdmin = CommunityPolicy.isAdmin(user, community);
+            const memberCount = await this.membershipRepository.getMemberCount(community.id);
 
             return {
                 data: community,
+                memberCount,
                 context: {
                     isMember,
                     isAdmin
@@ -56,10 +58,12 @@ class CommunityService {
 
     async getCommunityDetails(communityId: string, user?: User) {
         const community = await this.getCommunity(communityId);
+        const memberCount = await this.membershipRepository.getMemberCount(community.id);
 
         if (!user) {
             return {
                 data: community,
+                memberCount,
                 context: null,
                 permissions: null
             }
@@ -70,6 +74,7 @@ class CommunityService {
 
         return {
             data: community,
+            memberCount,
             context: {
                 isMember,
                 isAdmin

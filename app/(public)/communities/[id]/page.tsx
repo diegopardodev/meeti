@@ -1,8 +1,20 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import { communityService } from "@/src/features/communities/services/CommunityService";
 import { getServerSession } from "@/src/lib/auth-server";
 import Heading from "@/src/shared/components/typography/Heading";
 import CommunityActionsPanel from "@/src/features/communities/components/CommunityActionsPanel";
+import { pluralize } from "@/src/shared/utils/string";
+
+export async function generateMetadata({ params }: PageProps<"/communities/[id]">): Promise<Metadata> {
+    const { id } = await params;
+    const community = await communityService.getCommunity(id);
+
+    return {
+        title: `${community.name} community`,
+        description: `${community.description}`
+    }
+}
 
 export default async function CommunityPage(props: PageProps<"/communities/[id]">) {
     const { id } = await props.params;
@@ -32,14 +44,15 @@ export default async function CommunityPage(props: PageProps<"/communities/[id]"
                         </div>
                         <Heading className="text-center">{community.data.name}</Heading>
                         <p className="text-gray-600 text-lg text-center">{community.data.description}</p>
+                        <p className="text-gray-600 text-lg text-center">{community.memberCount} {pluralize("follower", community.memberCount)}</p>
                     </div>
                     <div className="bg-slate-100 p-5 rounded-2xl">
-                        {/* Admin Aquí */}
+                        {/* Admin here */}
                     </div>
                 </div>
             </main>
             <div className="grid grid-cols-1 lg:grid-cols-3 items-start gap-10 max-w-7xl mx-auto mt-10 space-y-5">
-                {/* Próximos Meetis Aquí */}
+                {/* Upcoming Meetis here */}
             </div>
         </>
     )
