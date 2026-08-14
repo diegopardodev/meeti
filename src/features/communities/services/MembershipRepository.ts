@@ -1,6 +1,6 @@
+import { and, count, eq } from "drizzle-orm";
 import { db } from "@/src/db";
 import { communityMembers } from "@/src/db/schema";
-import { and, count, eq } from "drizzle-orm";
 import { JoinedCommunity } from "../types";
 
 export interface IMembershipRepository {

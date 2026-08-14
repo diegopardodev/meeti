@@ -1,7 +1,7 @@
+import { and, count, eq } from "drizzle-orm";
 import { db } from "@/src/db";
 import { InsertNotification, SelectNotification } from "../types";
 import { notifications } from "@/src/db/schema";
-import { and, count, eq } from "drizzle-orm";
 
 export interface INotificationRepository {
     create(data: InsertNotification): Promise<SelectNotification>;

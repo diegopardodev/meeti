@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getServerSession } from "@/src/lib/auth-server"
+import { getServerSession } from "@/src/lib/auth-server";
 import { communityService } from "../services/CommunityService";
 import EmptyState from "./EmptyState";
 import CommunityItem from "./CommunityItem";

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { CommunityWithPermissions } from "../types"
+import { CommunityWithPermissions } from "../types";
 import CommunityDropdownMenu from "./CommunityDropdownMenu";
 import { pluralize } from "@/src/shared/utils/string";
 

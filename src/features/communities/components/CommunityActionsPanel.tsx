@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CommunityPermissions } from "../types"
+import { CommunityPermissions } from "../types";
 import CommunityMembership from "./CommunityMembership";
 
 type Props = {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
-import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
 const outfit = Outfit({
   variable: "--font-outfit",

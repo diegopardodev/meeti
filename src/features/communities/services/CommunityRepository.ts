@@ -1,9 +1,8 @@
+import { eq } from "drizzle-orm";
 import { db } from "@/src/db";
 import { InsertCommunity, SelectCommunity } from "../types";
 import { community } from "@/src/db/schema";
-import { eq } from "drizzle-orm";
 import { CommunityInput } from "../schemas/community";
-import { User } from "../../auth/types";
 
 export interface ICommunityRepository {
     create(data: InsertCommunity): Promise<void>;

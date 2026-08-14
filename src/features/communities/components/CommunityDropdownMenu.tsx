@@ -1,9 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { SelectCommunity } from "../types";
-import Link from "next/link";
 import { useCommunityStore } from "../store/community";
 
 type Props = {

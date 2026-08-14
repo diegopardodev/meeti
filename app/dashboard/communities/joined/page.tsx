@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import Heading from "@/src/shared/components/typography/Heading";
 import { generatePageTitle } from "@/src/shared/utils/metadata";
 import { getServerSession } from "@/src/lib/auth-server";
-import { redirect } from "next/navigation";
 import { membershipService } from "@/src/features/communities/services/MembershipService";
 import EmptyState from "@/src/features/communities/components/EmptyState";
 import CommunityItem from "@/src/features/communities/components/CommunityItem";
