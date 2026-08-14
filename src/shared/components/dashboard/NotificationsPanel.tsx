@@ -1,11 +1,17 @@
+import { Suspense, use } from "react";
+import Link from "next/link";
 import { BellIcon } from "@heroicons/react/24/outline";
+import Spinner from "../ui/Spinner";
+
+const notificationsPromise = fetch("/api/user/notifications").then(res => res.json());
 
 function NotificationCount() {
-    const totalNotifications = 0;
+    const totalNotifications = use(notificationsPromise);
 
     return (
-        <a
-            className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+        <Link
+            href="/dashboard/notifications"
+            className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-orange-500"
         >
             <span className="sr-only">View notifications</span>
             <BellIcon aria-hidden="true" className="size-6" />
@@ -14,12 +20,14 @@ function NotificationCount() {
                     {totalNotifications}
                 </span>
             )}
-        </a>
+        </Link>
     )
 }
 
 export default function NotificationsPanel() {
     return (
-        <NotificationCount />
+        <Suspense fallback={<Spinner />}>
+            <NotificationCount />
+        </Suspense>
     )
 }

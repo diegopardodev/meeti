@@ -26,7 +26,7 @@ export default function EmptyState({ section }: Props) {
             <p className="mt-1 text-sm text-gray-500">{ section === "communities" ? "Get started by creating a new community." : "Get started by joining a community" }</p>
             <div className="mt-6">
                 <Link
-                    href={`/dashboard/communities/${section === "communities" ? "create" : "joined"}`}
+                    href={`${section === "communities" ? "/dashboard/communities/create" : "/"}`}
                     className="inline-flex items-center rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-orange-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                 >
                     <PlusIcon aria-hidden="true" className="mr-1.5 -ml-0.5 size-5" />
