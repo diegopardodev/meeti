@@ -21,6 +21,14 @@ class CommunityService {
         });
     }
 
+    async getCommunitiesForAPI(userId: string) {
+        const communities = await this.communityRepository.findByUser(userId);
+        return communities.map(community => ({
+            id: community.id,
+            name: community.name
+        }));
+    }
+
     async getUserCommunities(user: User) {
         const communities = await this.communityRepository.findByUser(user.id);
 
