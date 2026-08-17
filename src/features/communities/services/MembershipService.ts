@@ -1,5 +1,5 @@
 import { User } from "../../auth/types";
-import { INotificationRepository, notificationRepository } from "../../notifications/services/NotificacionRepository";
+import { INotificationService, notificationService } from "../../notifications/services/NotificationService";
 import { CommunityPolicy } from "../policies/CommunityPolicy";
 import { MembershipPolicy } from "../policies/MembershipPolicy";
 import { communityRepository, ICommunityRepository } from "./CommunityRepository";
@@ -9,7 +9,7 @@ class MembershipService {
     constructor(
         private membershipRepository: IMembershipRepository,
         private communityRepository: ICommunityRepository,
-        private notificationRepository: INotificationRepository
+        private notificationService: INotificationService
     ) {}
 
     async toggleMembership(communityId: string, user: User) {
@@ -21,7 +21,7 @@ class MembershipService {
         if (MembershipPolicy.canJoin(user, community, isMember)) {
             await this.membershipRepository.addMember(communityId, user.id);
 
-            const notification = await this.notificationRepository.create({
+            await this.notificationService.createAndNotify({
                 userId: community.createdBy,
                 actorName: user.name,
                 message: "Joined your community",
@@ -81,4 +81,4 @@ class MembershipService {
     }
 }
 
-export const membershipService = new MembershipService(membershipRepository, communityRepository, notificationRepository);
+export const membershipService = new MembershipService(membershipRepository, communityRepository, notificationService);
