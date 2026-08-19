@@ -1,8 +1,12 @@
 import { FormInput, FormLabel, FormTextarea, FormToggle } from "@/src/shared/components/forms";
 import CommunityFormField from "./CommunityFormField";
+import CategoryFormField from "./CategoryFormField";
+import LocationPicker from "./LocationPicker";
+import dynamic from "next/dynamic";
+
+const DynamicLocationPicker = dynamic(() => import("./LocationPicker"), { ssr: false });
 
 export default function MeetiForm() {
-
     return (
         <>
             <fieldset className="space-y-3">
@@ -21,6 +25,7 @@ export default function MeetiForm() {
                     placeholder="Meeti description"
                 />
 
+                <CategoryFormField />
                 <CommunityFormField />
 
 
@@ -66,6 +71,8 @@ export default function MeetiForm() {
                     type="text"
                     placeholder="Venue name"
                 />
+
+                <DynamicLocationPicker />
             </fieldset>
         </>
     )

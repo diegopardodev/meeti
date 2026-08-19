@@ -2,12 +2,17 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Heading from "@/src/shared/components/typography/Heading";
 import CreateMeeti from "@/src/features/meetis/components/CreateMeeti";
+import { getServerSession } from "@/src/lib/auth-server";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
     title: "Create meeti"
 }
 
-export default function CreateMeetiPage() {
+export default async function CreateMeetiPage() {
+    const session = await getServerSession();
+    if (!session) redirect("/auth/sign-in");
+
     return (
         <>
             <Heading>Create a meeti</Heading>

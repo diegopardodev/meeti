@@ -1,0 +1,20 @@
+import { notFound } from "next/navigation";
+import { categoryRepository, ICategoryRepository } from "./CategoryRepository";
+
+class CategoryService {
+    constructor(
+        private readonly categoryRepository: ICategoryRepository
+    ) {}
+
+    async getAllCategories() {
+        return this.categoryRepository.findAll();
+    }
+
+    async getCategoryById(categoryId: string) {
+        const category = this.categoryRepository.findById(categoryId);
+        if (!category) notFound();
+        return category;
+    }
+}
+
+export const categoryService = new CategoryService(categoryRepository);
