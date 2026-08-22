@@ -1,12 +1,17 @@
-import { FormInput, FormLabel, FormTextarea, FormToggle } from "@/src/shared/components/forms";
+import { FormError, FormInput, FormLabel, FormTextarea, FormToggle } from "@/src/shared/components/forms";
 import CommunityFormField from "./CommunityFormField";
 import CategoryFormField from "./CategoryFormField";
-import LocationPicker from "./LocationPicker";
 import dynamic from "next/dynamic";
+import { useFormContext } from "react-hook-form";
+import { MeetiInput } from "../schemas/meeti";
+import UploadImage from "@/src/shared/components/uploads/UploadImage";
 
 const DynamicLocationPicker = dynamic(() => import("./LocationPicker"), { ssr: false });
 
 export default function MeetiForm() {
+    const { register, watch, formState: { errors }, setValue } = useFormContext<MeetiInput>();
+    const isVirtual = watch("virtual");
+
     return (
         <>
             <fieldset className="space-y-3">
@@ -17,14 +22,20 @@ export default function MeetiForm() {
                     id="title"
                     type="text"
                     placeholder="Meeti name"
+                    {...register("title")}
                 />
+                {errors.title && <FormError>{errors.title.message}</FormError>}
 
                 <FormLabel htmlFor="details">Meeti details</FormLabel>
                 <FormTextarea
                     id="details"
                     placeholder="Meeti description"
+                    {...register("details")}
                 />
+                {errors.details && <FormError>{errors.details.message}</FormError>}
 
+                <FormLabel>Meeti image:</FormLabel>
+                <UploadImage />
                 <CategoryFormField />
                 <CommunityFormField />
 
@@ -35,7 +46,10 @@ export default function MeetiForm() {
                     min={1}
                     id="availableSeats"
                     placeholder="Available seats"
+                    {...register("availableSeats")}
                 />
+                {errors.availableSeats && <FormError>{errors.availableSeats.message}</FormError>}
+
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                     <div className="space-y-3">
@@ -43,8 +57,9 @@ export default function MeetiForm() {
                         <FormInput
                             type="date"
                             id="date"
+                            {...register("date")}
                         />
-
+                        {errors.date && <FormError>{errors.date.message}</FormError>}
                     </div>
                     <div className="space-y-3">
                         <FormLabel htmlFor="time">Time:</FormLabel>
@@ -52,28 +67,39 @@ export default function MeetiForm() {
                             type="time"
                             step={1800}
                             id="time"
+                            {...register("time")}
                         />
+                        {errors.time && <FormError>{errors.time.message}</FormError>}
                     </div>
                 </div>
 
                 <FormLabel htmlFor="virtual">Virtual event?</FormLabel>
-                <FormToggle />
-            </fieldset>
-
-            <fieldset className="space-y-3">
-                <legend className="font-black text-4xl mb-5">
-                    Meeti location
-                </legend>
-
-                <FormLabel id="place_name">Venue name:</FormLabel>
-                <FormInput
-                    id="place_name"
-                    type="text"
-                    placeholder="Venue name"
+                <FormToggle
+                    checked={isVirtual}
+                    onChange={e => {
+                        setValue("virtual", e.target.checked);
+                    }}
                 />
-
-                <DynamicLocationPicker />
             </fieldset>
+            
+            {!isVirtual &&
+                <fieldset className="space-y-3">
+                    <legend className="font-black text-4xl mb-5">
+                        Meeti location
+                    </legend>
+
+                    <FormLabel id="place_name">Place name:</FormLabel>
+                    <FormInput
+                        id="place_name"
+                        type="text"
+                        placeholder="Place name"
+                        {...register("location.placeName")}
+                    />
+                    {"location" in errors && errors.location?.placeName && <FormError>{errors.location.placeName.message}</FormError>}
+                    
+                    <DynamicLocationPicker />
+                </fieldset>
+            }
         </>
     )
 }
